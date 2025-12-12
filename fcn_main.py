@@ -16,15 +16,15 @@ y = []
 for folder_name in os.walk("data/MAUS/Data/Raw_data/"):
     if folder_name[0][-1] != '/':
         for trial in pd.read_csv(f"{folder_name[0]}/inf_ecg.csv").to_numpy().transpose():
-            x_ecg.append(list(trial))
+            x_ecg.append(list(trial.astype(np.float32)))
         for trial in pd.read_csv(f"{folder_name[0]}/inf_gsr.csv").to_numpy().transpose():
-            x_gsr.append(list(trial))
+            x_gsr.append(list(trial.astype(np.float32)))
         for trial in pd.read_csv(f"{folder_name[0]}/inf_ppg.csv").to_numpy().transpose():
-            x_inf_ppg.append(list(trial))
+            x_inf_ppg.append(list(trial.astype(np.float32)))
         for trial in  pd.read_csv(f"{folder_name[0]}/pixart.csv").to_numpy().transpose():
-            x_pix_ppg.append(list(trial))
+            x_pix_ppg.append(list(trial.astype(np.float32)))
         for trial in pd.read_csv(f"data/MAUS/Subjective_rating/{folder_name[0][-3:]}/NASA_TLX.csv").iloc[7, 1:7].to_numpy():
-            y.append(float(trial))
+            y.append(np.float32(trial))
 
 # resample data to 4Hz on 30 seconds
 resample_size = 120
