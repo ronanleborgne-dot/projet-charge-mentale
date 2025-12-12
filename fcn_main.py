@@ -45,24 +45,24 @@ x_ecg_res_train, x_ecg_res_test, x_gsr_res_train, x_gsr_res_test, x_inf_ppg_res_
 )
 
 # resampled data loaders
-x_ecg_res_train_loader = torch.utils.data.DataLoader(x_ecg_res_train, shuffle=True, batch_size=12)
-x_ecg_res_test_loader = torch.utils.data.DataLoader(x_ecg_res_test, shuffle=True, batch_size=12)
-x_gsr_res_train_loader = torch.utils.data.DataLoader(x_gsr_res_train, shuffle=True, batch_size=12)
-x_gsr_res_test_loader = torch.utils.data.DataLoader(x_gsr_res_test, shuffle=True, batch_size=12)
-x_inf_res_ppg_train_loader = torch.utils.data.DataLoader(x_inf_ppg_res_train, shuffle=True, batch_size=12)
-x_inf_res_ppg_test_loader = torch.utils.data.DataLoader(x_inf_ppg_res_test, shuffle=True, batch_size=12)
+x_ecg_res_train_loader = torch.utils.data.DataLoader(torch.tensor(x_ecg_res_train), shuffle=True, batch_size=12)
+x_ecg_res_test_loader = torch.utils.data.DataLoader(torch.tensor(x_ecg_res_test), shuffle=True, batch_size=12)
+x_gsr_res_train_loader = torch.utils.data.DataLoader(torch.tensor(x_gsr_res_train), shuffle=True, batch_size=12)
+x_gsr_res_test_loader = torch.utils.data.DataLoader(torch.tensor(x_gsr_res_test), shuffle=True, batch_size=12)
+x_inf_res_ppg_train_loader = torch.utils.data.DataLoader(torch.tensor(x_inf_ppg_res_train), shuffle=True, batch_size=12)
+x_inf_res_ppg_test_loader = torch.utils.data.DataLoader(torch.tensor(x_inf_ppg_res_test), shuffle=True, batch_size=12)
 
 # not resampled data loaders
-x_ecg_train_loader = torch.utils.data.DataLoader(x_ecg_train, shuffle=True, batch_size=12)
-x_ecg_test_loader = torch.utils.data.DataLoader(x_ecg_test, shuffle=True, batch_size=12)
-x_gsr_train_loader = torch.utils.data.DataLoader(x_gsr_train, shuffle=True, batch_size=12)
-x_gsr_test_loader = torch.utils.data.DataLoader(x_gsr_test, shuffle=True, batch_size=12)
-x_inf_ppg_train_loader = torch.utils.data.DataLoader(x_inf_ppg_train, shuffle=True, batch_size=12)
-x_inf_ppg_test_loader = torch.utils.data.DataLoader(x_inf_ppg_test, shuffle=True, batch_size=12)
+x_ecg_train_loader = torch.utils.data.DataLoader(torch.tensor(x_ecg_train), shuffle=True, batch_size=12)
+x_ecg_test_loader = torch.utils.data.DataLoader(torch.tensor(x_ecg_test), shuffle=True, batch_size=12)
+x_gsr_train_loader = torch.utils.data.DataLoader(torch.tensor(x_gsr_train), shuffle=True, batch_size=12)
+x_gsr_test_loader = torch.utils.data.DataLoader(torch.tensor(x_gsr_test), shuffle=True, batch_size=12)
+x_inf_ppg_train_loader = torch.utils.data.DataLoader(torch.tensor(x_inf_ppg_train), shuffle=True, batch_size=12)
+x_inf_ppg_test_loader = torch.utils.data.DataLoader(torch.tensor(x_inf_ppg_test), shuffle=True, batch_size=12)
 
 # y data loaders
-y_train_loader = torch.utils.data.DataLoader(y_train, shuffle=True, batch_size=12)
-y_test_loader = torch.utils.data.DataLoader(y_test, shuffle=True, batch_size=12)
+y_train_loader = torch.utils.data.DataLoader(torch.tensor(y_train), shuffle=True, batch_size=12)
+y_test_loader = torch.utils.data.DataLoader(torch.tensor(y_test), shuffle=True, batch_size=12)
 
 
 fcn_net=FCNModel(num_signals=3, kernel_size=4)
