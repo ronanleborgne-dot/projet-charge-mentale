@@ -33,7 +33,46 @@ x_gsr_res = [resample(x, resample_size) for x in x_gsr]
 x_inf_ppg_res = [resample(x, resample_size) for x in x_inf_ppg]
 #x_pix_ppg_res = resample(x_pix_ppg, resample_size) TODO make this work (not all things of the same size)
 
-x_ecg_res_train, x_ecg_res_test, x_gsr_res_train, x_gsr_res_test, x_inf_ppg_res_train, x_inf_ppg_res_test, x_ecg_train, x_ecg_test, x_gsr_train, x_gsr_test, x_inf_ppg_train, x_inf_ppg_test, y_train, y_test = train_test_split(
+x_ecg_res_norm = torch.nn.functional.normalize(torch.tensor(x_ecg_res))
+x_gsr_res_norm = torch.nn.functional.normalize(torch.tensor(x_gsr_res))
+x_inf_ppg_norm = torch.nn.functional.normalize(torch.tensor(x_inf_ppg))
+x_ecg_norm = torch.nn.functional.normalize(torch.tensor(x_ecg))
+x_gsr_norm = torch.nn.functional.normalize(torch.tensor(x_gsr))
+x_inf_ppg_norm = torch.nn.functional.normalize(torch.tensor(x_inf_ppg))
+
+(
+x_ecg_res_norm_train,
+x_ecg_res_norm_test,
+x_gsr_res_norm_train,
+x_gsr_res_norm_test,
+x_inf_ppg_res_norm_train,
+x_inf_ppg_res_norm_test,
+x_ecg_norm_train,
+x_ecg_norm_test,
+x_gsr_norm_train,
+x_gsr_norm_test,
+x_inf_ppg_norm_train,
+x_inf_ppg_norm_test,
+x_ecg_res_train,
+x_ecg_res_test,
+x_gsr_res_train,
+x_gsr_res_test,
+x_inf_ppg_res_train,
+x_inf_ppg_res_test,
+x_ecg_train,
+x_ecg_test,
+x_gsr_train,
+x_gsr_test,
+x_inf_ppg_train,
+x_inf_ppg_test,
+y_train,
+y_test) = train_test_split(
+    x_ecg_res_norm,
+    x_gsr_res_norm,
+    x_inf_ppg_norm,
+    x_ecg_norm,
+    x_gsr_norm,
+    x_inf_ppg_norm,
     x_ecg_res,
     x_gsr_res,
     x_inf_ppg_res,
@@ -60,6 +99,22 @@ x_gsr_train_loader = torch.utils.data.DataLoader(torch.tensor(x_gsr_train), shuf
 x_gsr_test_loader = torch.utils.data.DataLoader(torch.tensor(x_gsr_test), shuffle=True, batch_size=12)
 x_inf_ppg_train_loader = torch.utils.data.DataLoader(torch.tensor(x_inf_ppg_train), shuffle=True, batch_size=12)
 x_inf_ppg_test_loader = torch.utils.data.DataLoader(torch.tensor(x_inf_ppg_test), shuffle=True, batch_size=12)
+
+# resampled normalized data loaders
+x_ecg_res_train_loader = torch.utils.data.DataLoader(x_ecg_res_norm_train, shuffle=True, batch_size=12)
+x_ecg_res_test_loader = torch.utils.data.DataLoader(x_ecg_res_norm_test, shuffle=True, batch_size=12)
+x_gsr_res_train_loader = torch.utils.data.DataLoader((x_gsr_res_norm_train), shuffle=True, batch_size=12)
+x_gsr_res_test_loader = torch.utils.data.DataLoader((x_gsr_res_norm_test), shuffle=True, batch_size=12)
+x_inf_res_ppg_train_loader = torch.utils.data.DataLoader((x_inf_ppg_res_norm_train), shuffle=True, batch_size=12)
+x_inf_res_ppg_test_loader = torch.utils.data.DataLoader((x_inf_ppg_res_norm_test), shuffle=True, batch_size=12)
+
+# not resampled normalized data loaders
+x_ecg_train_norm_loader = torch.utils.data.DataLoader((x_ecg_norm_train), shuffle=True, batch_size=12)
+x_ecg_test_norm_loader = torch.utils.data.DataLoader((x_ecg_norm_test), shuffle=True, batch_size=12)
+x_gsr_train_norm_loader = torch.utils.data.DataLoader((x_gsr_norm_train), shuffle=True, batch_size=12)
+x_gsr_test_norm_loader = torch.utils.data.DataLoader((x_gsr_norm_test), shuffle=True, batch_size=12)
+x_inf_ppg_train_norm_loader = torch.utils.data.DataLoader((x_inf_ppg_norm_train), shuffle=True, batch_size=12)
+x_inf_ppg_test_norm_loader = torch.utils.data.DataLoader((x_inf_ppg_norm_test), shuffle=True, batch_size=12)
 
 # y data loaders
 y_train_loader = torch.utils.data.DataLoader(torch.tensor(y_train), shuffle=True, batch_size=12)
